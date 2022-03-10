@@ -6,7 +6,7 @@ import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 // AUTOPLAY BACKEND
-require('../backend/app.js')
+require('./backend/app.js')
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
