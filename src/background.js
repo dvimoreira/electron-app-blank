@@ -16,6 +16,7 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
+    show: false,
     webPreferences: {
       nodeIntegration: true
       // Use pluginOptions.nodeIntegration, leave this alone
@@ -37,6 +38,7 @@ async function createWindow() {
   }
 }
 
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
@@ -55,6 +57,7 @@ app.on('activate', () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+let loadingScreen
 app.on('ready', async () => {
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
@@ -64,7 +67,36 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
-  createWindow()
+  
+  /// create a browser window
+  loadingScreen = new BrowserWindow(
+    Object.assign({
+      /// define width and height for the window
+      width: 250,
+      height: 400,
+      /// remove the window frame, so it will become a frameless window
+      frame: false,
+      /// and set the transparency, to remove any window background color
+      transparent: true
+    })
+  )
+  loadingScreen.setResizable(false)
+
+  const modalPath = process.env.NODE_ENV === 'development'
+    ? 'http://localhost:8080/#/loading'
+    : `file://${__dirname}/index.html#loading`
+
+  loadingScreen.loadURL(modalPath)
+  loadingScreen.on('closed', () => (loadingScreen = null))
+  loadingScreen.webContents.on('did-finish-load', () => {
+    loadingScreen.show()
+  })
+  
+  /// add a little bit of delay for tutorial purposes, remove when not needed
+  setTimeout(() => {
+    loadingScreen.close()
+    createWindow()
+  }, 5000)
 })
 
 // Exit cleanly on request from parent process in development mode.
