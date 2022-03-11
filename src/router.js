@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
 import RouterPages from './routes/pages'
+import RouterGlobal from './routes/global'
 
 Vue.use(Router)
 
 let arrayRoutes = [
+  ...RouterGlobal,
   ...RouterPages
 ]
 

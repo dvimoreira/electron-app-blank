@@ -5,5 +5,5 @@
  * que foram criados na pasta '/components'
  */
 export default [
-  // { name: 'mu-loading', component: Loading }
+  // { name: 'sv-loading', component: Loading }
 ]
