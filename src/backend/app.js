@@ -2,14 +2,12 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
-  res.send('Hello World Foi!')
-})
+const  { 
+  getClients,
+} = require('./controllers/clients.js')
 
-app.get('/foi', (req, res) => {
-    res.send('Hello World TESTINHHO DO DAVID!')
-})
+app.use('/', getClients)
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`API listening on port ${port}`)
 })
