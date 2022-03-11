@@ -1,14 +1,34 @@
 <template>
     <div id="global-loading">
-        <h1>Carregando</h1>
+        <img src="../assets/loader.gif">
+        <h1>Carregando...</h1>
     </div>
 </template>
 
 <style lang="scss">
     @import '../assets/style.scss';
 
-    @media (min-width: 576px) {}
-    @media (min-width: 768px) {}
-    @media (min-width: 992px) {}
-    @media (min-width: 1200px) {}
+    html, body {
+        background: none;
+    }
+
+    #global-loading {
+        align-content: center;
+        align-items: center;
+        background: #1a1438;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        position: fixed;
+        text-align: center;
+        width: 100%;
+        h1 {
+            color: $white;
+            display: block;
+            font-size: 16px;
+            margin: 15px 0 0 0;
+        }
+    }
 </style>
