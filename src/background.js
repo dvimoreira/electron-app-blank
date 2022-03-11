@@ -66,7 +66,7 @@ app.on('ready', async () => {
   loadingScreen.setResizable(false)
 
   const modalPath = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:8080/#/loading'
+    ? `${process.env.BASE_URL}/#/loading`
     : `file://${__dirname}/index.html#loading`
 
   loadingScreen.loadURL(modalPath)
